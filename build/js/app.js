@@ -7,15 +7,14 @@ var apiKey = require('./../.env').apiKey;
 GithubLookUp.prototype.ajCall =function (username){$.ajax({
     url: ('https://api.github.com/users/' + username + '?access_token='+ apiKey)
 }).done(function (res) {
-    console.log(res);
     $.ajax({
         url: 'https://api.github.com/users/'+username+'/repos',
         sort: 'created: asc',
         per_page: 5
-    }).then(function (repos){
+    }).done(function (repos){
         $.each(repos, function (index, repo){
+            console.log(repo);
         $('#repos').append(`
-                    
                     <div class='well'> 
                         <div class='row'>
                             <div class='col-md-7'>
@@ -92,14 +91,13 @@ $('#profile').html(`
             </div>
 
 `);
-})}
+});};
 exports.GithubLookUpModule = GithubLookUp;
 },{"./../.env":1}],3:[function(require,module,exports){
 var GithubLookUp = require('./../js/script.js').GithubLookUpModule;
 var githubUserFinder = new GithubLookUp();
 $(document).ready(function (){
     $('#userInput').on('keyup', function (event){
-        console.log(event.target.value);
         username = event.target.value;
         githubUserFinder.ajCall(username);
     });

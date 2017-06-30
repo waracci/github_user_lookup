@@ -8,8 +8,9 @@ GithubLookUp.prototype.ajCall =function (username){$.ajax({
         url: 'https://api.github.com/users/'+username+'/repos',
         sort: 'created: asc',
         per_page: 5
-    }).then(function (repos){
+    }).done(function (repos){
         $.each(repos, function (index, repo){
+            console.log(repo);
         $('#repos').append(`
                     <div class='well'> 
                         <div class='row'>
@@ -87,5 +88,5 @@ $('#profile').html(`
             </div>
 
 `);
-})}
+});};
 exports.GithubLookUpModule = GithubLookUp;

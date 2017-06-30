@@ -1,9 +1,13 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+exports.apiKey = '4daa22814b55e3b7c981e2e2bc4a311a68696bcd';
+},{}],2:[function(require,module,exports){
 GithubLookUp = function (){};
 var username;
 var apiKey = require('./../.env').apiKey;
 GithubLookUp.prototype.ajCall =function (username){$.ajax({
     url: ('https://api.github.com/users/' + username + '?access_token='+ apiKey)
 }).done(function (res) {
+    console.log(res);
     $.ajax({
         url: 'https://api.github.com/users/'+username+'/repos',
         sort: 'created: asc',
@@ -11,6 +15,7 @@ GithubLookUp.prototype.ajCall =function (username){$.ajax({
     }).then(function (repos){
         $.each(repos, function (index, repo){
         $('#repos').append(`
+                    
                     <div class='well'> 
                         <div class='row'>
                             <div class='col-md-7'>
@@ -89,3 +94,14 @@ $('#profile').html(`
 `);
 })}
 exports.GithubLookUpModule = GithubLookUp;
+},{"./../.env":1}],3:[function(require,module,exports){
+var GithubLookUp = require('./../js/script.js').GithubLookUpModule;
+var githubUserFinder = new GithubLookUp();
+$(document).ready(function (){
+    $('#userInput').on('keyup', function (event){
+        console.log(event.target.value);
+        username = event.target.value;
+        githubUserFinder.ajCall(username);
+    });
+});
+},{"./../js/script.js":2}]},{},[3]);

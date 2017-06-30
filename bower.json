@@ -1,0 +1,17 @@
+{
+  "name": "independent_project1",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "waracci"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

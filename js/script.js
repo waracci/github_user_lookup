@@ -1,9 +1,15 @@
 GithubLookUp = function (){};
 var username;
 var apiKey = require('./../.env').apiKey;
-GithubLookUp.prototype.ajCall =function (username){$.ajax({
+GithubLookUp.prototype.ajCall =function (username){
+$.ajax({
     url: ('https://api.github.com/users/' + username + '?access_token='+ apiKey)
 }).done(function (res) {
+    ////
+
+
+
+
     $.ajax({
         url: 'https://api.github.com/users/'+username+'/repos',
         sort: 'created: asc',
@@ -31,6 +37,12 @@ GithubLookUp.prototype.ajCall =function (username){$.ajax({
                     `);
                 });
             }); 
+
+
+
+
+
+
 $('#profile').html(`
 <div class="row">
                 <div class="col-md-3 text-center">

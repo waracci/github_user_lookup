@@ -5,11 +5,6 @@ GithubLookUp.prototype.ajCall =function (username){
 $.ajax({
     url: ('https://api.github.com/users/' + username + '?access_token='+ apiKey)
 }).done(function (res) {
-    ////
-
-
-
-
     $.ajax({
         url: 'https://api.github.com/users/'+username+'/repos',
         sort: 'created: asc',
@@ -17,7 +12,7 @@ $.ajax({
     }).done(function (repos){
         $.each(repos, function (index, repo){
             console.log(repo);
-        $('#repos').append(`
+        $('#repos').html(`
                     <div class='well'> 
                         <div class='row'>
                             <div class='col-md-7'>
@@ -33,16 +28,9 @@ $.ajax({
                             </div>
                         </div>
                     </div>
-
                     `);
                 });
             }); 
-
-
-
-
-
-
 $('#profile').html(`
 <div class="row">
                 <div class="col-md-3 text-center">
@@ -93,12 +81,11 @@ $('#profile').html(`
                             <h3><label for="" class="label label-success">company: ${res.company}</label></h3>
                         </div>
                         <div class="col-md-4">
-                            <h3><label for="" class="label label-success">created at: ${res.created_at}</label></h3>
+                            <h4><label for="" class="label label-success">created at: ${res.created_at}</label></h4>
                         </div>
                     </div>  
                 </div>
             </div>
-
 `);
 });};
 exports.GithubLookUpModule = GithubLookUp;
